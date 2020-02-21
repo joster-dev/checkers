@@ -1,0 +1,13 @@
+#game {
+  height: 100vh;
+  min-height: 650px;
+
+  display: grid;
+}
+
+.grid {
+  display: grid;
+  grid-gap: 1px;
+  background-color: black;
+  border: 1px solid black;
+}
