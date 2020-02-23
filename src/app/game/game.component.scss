@@ -1,13 +1,11 @@
-#game {
+#board {
   height: 100vh;
   min-height: 650px;
 
   display: grid;
-}
-
-.grid {
-  display: grid;
   grid-gap: 1px;
-  background-color: black;
-  border: 1px solid black;
+  grid-auto-rows: minmax(0, 1fr);
+  grid-auto-columns: minmax(0, 1fr);
+  background-color: #000;
+  border-bottom: 1px solid #000;
 }

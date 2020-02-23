@@ -1,1 +1,14 @@
-<p>cell works!</p>
+<button type="button" [class.accent]="isAccent" [class.target]="isTarget" [disabled]="isDisabled" [title]="title" (click)="action.emit()">
+  <ng-container [ngSwitch]="isOccupantPawn">
+    <ng-container *ngSwitchCase="true">
+      {{ cell.occupant!.side === 'a' ? '♙' : '♟' }}
+    </ng-container>
+    <ng-container *ngSwitchCase="false">
+      {{ cell.occupant!.side === 'a' ? '♔' : '♚' }}
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      &nbsp;
+    </ng-container>
+  </ng-container>
+  <div *ngIf="isTarget" class="target"></div>
+</button>

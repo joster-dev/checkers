@@ -1,0 +1,25 @@
+<form>
+  <fieldset>
+    <legend title="Settings">
+      ⚙️
+    </legend>
+    <button type="button" (action)="restart.emit()">
+      Restart
+    </button>
+    <br />
+    <label>
+      <input [(ngModel)]="form.width" (ngModelChange)="restart.emit()" name="width" type="number" step="1" min="8" max="100" />
+      Board Width
+    </label>
+    <br />
+    <label>
+      <input [(ngModel)]="form.height" (ngModelChange)="restart.emit()" name="height" type="number" step="1" min="8" max="100" />
+      Board Height
+    </label>
+    <br />
+    <label>
+      <input [(ngModel)]="form.rank" (ngModelChange)="restart.emit()" name="rank" type="number" step="1" min="3" max="5" />
+      Ranks of Men
+    </label>
+  </fieldset>
+</form>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Cell } from '../models/cell';
-import { Game } from '../models/game';
+import { Form, Game } from '../models';
+import { GameService } from './game.service';
 
 @Component({
   selector: 'checkers-game',
@@ -8,26 +8,15 @@ import { Game } from '../models/game';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent {
-
   game!: Game;
+  form = new Form();
 
-  constructor() {
+  constructor(private gameService: GameService) {
     this.newGame();
   }
 
-
   newGame() {
-    this.game = new Game(this.createGrid());
-  }
-
-
-  private createGrid(): Cell[] {
-    const temp: Cell[] = [];
-    for (let x = 0; x < 7; x++) {
-      for (let y = 0; y < 7; y++) {
-        temp.push(new Cell(x, y));
-      }
-    }
-    return temp;
+    const board = this.gameService.createBoard(this.form);
+    this.game = new Game(board);
   }
 }
