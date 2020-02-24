@@ -6,9 +6,6 @@
     <ng-container *ngSwitchCase="false">
       {{ cell.occupant!.side === 'a' ? '♔' : '♚' }}
     </ng-container>
-    <ng-container *ngSwitchDefault>
-      &nbsp;
-    </ng-container>
   </ng-container>
   <div *ngIf="isTarget" class="target"></div>
 </button>
