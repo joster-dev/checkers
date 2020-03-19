@@ -20,17 +20,15 @@ export class CellComponent {
   }
 
   get isOccupantPawn(): boolean | void {
-    if (this.cell.occupant === undefined) {
+    if (this.cell.occupant === undefined)
       return;
-    }
 
     return this.cell.occupant.isKing === false;
   }
 
   get title() {
-    if (this.cell.occupant === undefined) {
+    if (this.cell.occupant === undefined)
       return '';
-    }
 
     return `${this.cell.occupant.side} ${this.cell.occupant.isKing ? 'King' : 'Men'}`;
   }

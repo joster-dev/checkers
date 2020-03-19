@@ -1,4 +1,12 @@
 <section id="board">
-  <checkers-cell *ngFor="let cell of game.cells" [cell]="cell" [style.grid-column]="cell.x + 1" [style.grid-row]="cell.y + 1"></checkers-cell>
+  <checkers-cell
+    *ngFor="let cell of game.cells"
+    [cell]="cell"
+    [style.grid-column]="cell.x + 1"
+    [style.grid-row]="cell.y + 1"
+  ></checkers-cell>
 </section>
-<checkers-form [form]="form" (restart)="newGame()"></checkers-form>
+<checkers-form
+  [form]="form"
+  (restart)="newGame()"
+></checkers-form>
