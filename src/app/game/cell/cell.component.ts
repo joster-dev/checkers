@@ -8,6 +8,7 @@ import { Cell } from 'src/app/models';
 })
 export class CellComponent {
   @Input() cell!: Cell;
+  @Input() isActive = false;
   @Input() isDisabled = false;
   @Input() isTarget = false;
 

@@ -1,10 +1,11 @@
 <button
   type="button"
+  [class.active]="isActive"
   [class.accent]="isAccent"
   [class.target]="isTarget"
   [disabled]="isDisabled"
   [title]="title"
-  (click)="action.emit()"
+  (click)="action.emit(cell)"
 >
   <ng-container [ngSwitch]="isOccupantPawn">
     <ng-container *ngSwitchCase="true">

@@ -3,17 +3,22 @@ button {
   height: 100%;
   position: relative;
   background-color: white;
-  border: none;
+  border-width: medium;
   font-size: x-large;
   cursor: pointer;
   padding: 0;
 
   &:disabled {
     cursor: default;
+    border: none;
   }
 
   &.accent {
     background-color: #eee;
+  }
+
+  &.active {
+    box-shadow: inset 0 0 1em black;
   }
 
   .target {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Form, Game } from '../models';
+import { Form, Game, Cell } from '../models';
 import { GameService } from './game.service';
 
 @Component({
@@ -11,12 +11,43 @@ export class GameComponent {
   game!: Game;
   form = new Form();
 
+  sourceCell?: Cell;
+  sourceMovedIndex = 0;
+
   constructor(private gameService: GameService) {
     this.newGame();
   }
 
+  get targetCells(): Cell[] {
+    return this.game.moves
+      .filter(move => this.sourceCell === undefined || move.source === this.sourceCell)
+      .reduce((accumulator, move) => ([...accumulator, move.targets[this.sourceMovedIndex]]), []);
+  }
+
+  isDisabled(cell: Cell) {
+    if (this.sourceCell === undefined)
+      return this.game.moves
+        .map(move => move.source)
+        .includes(cell) === false;
+
+    if (this.sourceCell === cell)
+      return false;
+
+    return this.targetCells.includes(cell) === false;
+  }
+
+  click(cell: Cell) {
+    if (cell.occupant !== undefined && cell.occupant.side === this.game.turn) {
+      this.sourceCell = cell === this.sourceCell ? undefined : cell;
+      return;
+    }
+
+
+  }
+
   newGame() {
-    const board = this.gameService.createBoard(this.form);
+    // this.form
+    const board = this.gameService.createTestBoard();
     this.game = new Game(board);
   }
 }

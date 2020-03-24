@@ -36,4 +36,27 @@ export class GameService {
 
     return temp;
   }
+
+  createTestBoard(): Cell[] {
+    const temp: Cell[] = [];
+
+    for (let x = 0; x < 8; x++)
+      for (let y = 0; y < 8; y++) {
+        const cell = new Cell(x, y);
+
+        if (x === 2 && y === 4) {
+          cell.occupant = new Piece('a');
+          // cell.occupant.isKing = true;
+        }
+
+        if ((x === 3 && y === 3)
+          || (x === 5 && y === 5)
+          || (x === 5 && y === 3))
+          cell.occupant = new Piece('b');
+
+        temp.push(cell);
+      }
+
+    return temp;
+  }
 }

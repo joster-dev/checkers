@@ -2,8 +2,12 @@
   <checkers-cell
     *ngFor="let cell of game.cells"
     [cell]="cell"
+    [isActive]="cell === sourceCell"
+    [isTarget]="targetCells.includes(cell)"
+    [isDisabled]="isDisabled(cell)"
     [style.grid-column]="cell.x + 1"
     [style.grid-row]="cell.y + 1"
+    (action)="click(cell)"
   ></checkers-cell>
 </section>
 <checkers-form
