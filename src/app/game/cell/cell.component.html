@@ -2,6 +2,7 @@
   type="button"
   [class.active]="isActive"
   [class.accent]="isAccent"
+  [class.king-head]="cell.kingHead"
   [class.target]="isTarget"
   [disabled]="isDisabled"
   [title]="title"
@@ -19,4 +20,10 @@
     *ngIf="isTarget"
     class="target"
   ></div>
+  <div
+    *ngIf="cell.kingHead !== undefined"
+    class="watermark"
+  >
+    {{ cell.kingHead === 'a' ? '♔' : '♚' }}
+  </div>
 </button>

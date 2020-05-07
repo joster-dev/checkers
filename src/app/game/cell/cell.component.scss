@@ -21,7 +21,23 @@ button {
     box-shadow: inset 0 0 1em black;
   }
 
-  .target {
+  > .watermark {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    font-size: 5rem;
+    opacity: 0.08;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  > .target {
     opacity: 0.2;
     background: yellow;
     position: absolute;
