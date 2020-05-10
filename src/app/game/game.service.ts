@@ -50,15 +50,15 @@ export class GameService {
             cell = new Cell(x, y, 'b');
         }
 
-        if (x === 2 && y === 4) {
+        if (x === 3 && y === 5) {
           cell.occupant = new Piece('a');
           // cell.occupant.isKing = true;
         }
 
-        if ((x === 3 && y === 3)
-          || (x === 5 && y === 5)
-          || (x === 5 && y === 3)
-          || (x === 5 && y === 1))
+        if ((x === 4 && y === 4)
+          || (x === 6 && y === 6)
+          || (x === 6 && y === 4)
+          || (x === 6 && y === 2))
           cell.occupant = new Piece('b');
 
         temp.push(cell);

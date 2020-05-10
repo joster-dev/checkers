@@ -12,7 +12,8 @@ export class GameComponent {
   form = new Form();
 
   sourceCell?: Cell;
-  sourceMovedIndex = 0;
+  // todo: implement reverse actions for player
+  // sourceMovedIndex = 0;
 
   constructor(private gameService: GameService) {
     this.newGame();
@@ -21,7 +22,7 @@ export class GameComponent {
   get targetCells(): Cell[] {
     return this.game.moves
       .filter(move => this.sourceCell === undefined || move.source === this.sourceCell)
-      .reduce((accumulator, move) => ([...accumulator, move.targets[this.sourceMovedIndex]]), []);
+      .reduce((accumulator, move) => ([...accumulator, move.targets[move.targets.length - 1]]), []);
   }
 
   isDisabled(cell: Cell) {

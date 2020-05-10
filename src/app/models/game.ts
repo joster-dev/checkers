@@ -9,9 +9,13 @@ export class Game {
     public turn: 'a' | 'b' = 'a'
   ) { }
 
-  get moves(): Move[] {
+  get army(): Cell[] {
     return this.cells
-      .filter(cell => cell.occupant !== undefined && cell.occupant.side === this.turn)
+      .filter(cell => cell.occupant !== undefined && cell.occupant.side === this.turn);
+  }
+
+  get moves(): Move[] {
+    return this.army
       .reduce((accumulator, cell) => {
         const diagonal = this.diagonal(cell, 2);
 
@@ -19,70 +23,45 @@ export class Game {
           .filter(cells => cells.length > 0 && cells[0].occupant === undefined)
           .map(cells => ({ source: cell, targets: [cells[0]] }));
 
-        const jumpMoves = diagonal
-          .filter(cells => cells.length > 1
-            && cells[0].occupant !== undefined
-            && cells[0].occupant.side !== this.turn
-            && cells[1].occupant === undefined)
-          .reduce((acc, cells) => {
-            const heh = this.jumpMoves({ source: cell, targets: [cells[1]] });
-            debugger;
-            return acc;
-          }, [] as Move[]);
+        const jumpMoves = this.jumpMoves2({ source: cell, targets: [] });
 
-
-
-        return accumulator.concat(openMoves);
+        return accumulator.concat(openMoves, jumpMoves);
       }, [] as Move[]);
   }
 
-  jumpMoves(move: Move): Move[] {
-    const moveSource = move.targets.length <= 1 ? move.source : move.targets[move.targets.length - 2];
-    const moveTarget = move.targets[move.targets.length - 1];
+  private jumpMoves2(move: Move): Move[] {
     const cellsCopy = JSON.parse(JSON.stringify(this.cells));
     const gameCopy = new Game(cellsCopy, this.turn);
-    debugger;
-    const diagonal = gameCopy.diagonal(moveTarget, 2);
-    const jumps = diagonal
+    const source = move.targets.length === 0
+      ? move.source
+      : move.targets[move.targets.length - 1];
+    const diagonal = gameCopy.diagonal(source, 2);
+    const jumpMoves = diagonal
       .filter(cells => cells.length > 1
         && cells[0].occupant !== undefined
         && cells[0].occupant.side !== this.turn
         && cells[1].occupant === undefined);
 
-    if (jumps.length === 0)
+    if (jumpMoves.length === 0) {
+      if (move.targets.length === 0)
+        return [];
       return [move];
+    }
 
-    debugger;
-
-    // play the move
-    // return recursive
-
-    return []
-
-
-    // return [...gameCopy.jumpMoves({})]
-
-    // create a new copy of game
-    // preform the jump to remove piece from board
-
-
+    return jumpMoves
+      .map(jump => this.jumpMoves2({ source: move.source, targets: move.targets.concat(this.cell(jump[1])) }))
+      .reduce((acc, cells) => acc.concat(cells), []);
   }
 
-  // targets(cell: Cell): Cell[] {
-  //   if (cell.occupant === undefined)
-  //     throw new Error('only get targets for sources');
-
-
-  //   const
-  // }
-
-  // win(x: number, y: number): boolean {
-  //   this.target = this.cells
-  // }
-
+  cell(cell: { x: number; y: number }): Cell {
+    const temp = this.cells.find(item => item.x === cell.x && item.y === cell.y);
+    if (temp === undefined)
+      throw new Error('invalid cell');
+    return temp;
+  }
 
   // @returns - each Cell[] max length equal to @depth
-  private diagonal(cell: Cell, depth = 1): Cell[][] {
+  diagonal(cell: Cell, depth = 1): Cell[][] {
     return [
       { x: 1, y: 1 },
       { x: -1, y: 1 },
