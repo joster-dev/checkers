@@ -1,0 +1,65 @@
+<svg
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  width="100px"
+  height="100px"
+  viewBox="0 0 100 100"
+>
+  <radialGradient
+    id="j-grad"
+    cx="50%"
+    cy="50%"
+    r="50%"
+  >
+    <stop
+      offset="0%"
+      stop-color="#000000"
+    />
+    <stop
+      offset="100%"
+      stop-color="#224477"
+    />
+  </radialGradient>
+  <path
+    *ngIf="type === 'king'"
+    fill="url(#j-grad)"
+    stroke="#000000"
+    stroke-miterlimit="10"
+    d="M 10, 50
+    A 1, 1, 0, 0, 0, 90, 50
+    A 1, 1, 0, 0, 0, 10, 50z
+    M 20, 50
+    l 6, -15,
+    l 6, 15,
+    l 6, -15,
+    l 6, 15,
+    l 6, -25,
+    l 6, 25,
+    l 6, -15,
+    l 6, 15,
+    l 6, -15,
+    l 6, 15,
+    a 1, 1, 0, 0, 1, -60, 0z"
+  />
+  <path
+    *ngIf="type === 'pawn'"
+    fill="url(#j-grad)"
+    stroke="#000000"
+    stroke-miterlimit="10"
+    d="M 10, 50
+    A 1, 1, 0, 0, 0, 90, 50
+    A 1, 1, 0, 0, 0, 10, 50z
+    M 80,50,
+    a 1, 1, 0, 0, 1, -60, 0z"
+  />
+</svg>
+<!-- <path
+  fill="#FFFFFF"
+  stroke="#000000"
+  stroke-miterlimit="10"
+  d="M 10, 50
+A 1, 1, 0, 0, 0, 90, 50
+A 1, 1, 0, 0, 0, 10, 50z
+M 20,50,
+a 1, 1, 0, 0, 1, 60, 0z"
+/> -->

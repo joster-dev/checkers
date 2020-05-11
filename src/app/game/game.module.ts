@@ -8,6 +8,7 @@ import { GameComponent } from './game.component';
 import { CellComponent } from './cell/cell.component';
 
 import { GameService } from './game.service';
+import { IconComponent } from './icon/icon.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { GameService } from './game.service';
   ],
   declarations: [
     GameComponent,
-    CellComponent
+    CellComponent,
+    IconComponent
   ],
   exports: [
     GameComponent
