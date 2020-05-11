@@ -52,14 +52,17 @@ export class GameService {
 
         if (x === 3 && y === 5) {
           cell.occupant = new Piece('a');
-          // cell.occupant.isKing = true;
+          cell.occupant.isKing = true;
         }
 
         if ((x === 4 && y === 4)
+          || (x === 7 && y === 1)
+          || (x === 4 && y === 6)
           || (x === 6 && y === 6)
           || (x === 6 && y === 4)
-          || (x === 6 && y === 2))
+          || (x === 6 && y === 2)) {
           cell.occupant = new Piece('b');
+        }
 
         temp.push(cell);
       }

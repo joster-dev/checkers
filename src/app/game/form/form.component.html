@@ -1,52 +1,43 @@
+<br />
+<div>
+  <fc-button (clicked)="restart.emit()">
+    Restart
+  </fc-button>
+</div>
 <form>
   <fieldset>
     <legend title="Settings">
       ⚙️
     </legend>
-    <button
-      type="button"
-      (action)="restart.emit()"
-    >
-      Restart
-    </button>
-    <br />
-    <label>
-      <input
+    <div>
+      <fc-integer
         [(ngModel)]="form.width"
         (ngModelChange)="restart.emit()"
+        label="Board Width"
         name="width"
         type="number"
-        step="1"
         min="8"
         max="100"
-      />
-      Board Width
-    </label>
-    <br />
-    <label>
-      <input
+      ></fc-integer>
+      <fc-integer
         [(ngModel)]="form.height"
         (ngModelChange)="restart.emit()"
+        label="Board Height"
         name="height"
         type="number"
-        step="1"
         min="8"
         max="100"
-      />
-      Board Height
-    </label>
-    <br />
-    <label>
-      <input
+      ></fc-integer>
+      <fc-integer
         [(ngModel)]="form.rank"
         (ngModelChange)="restart.emit()"
+        label="Ranks of Men"
         name="rank"
         type="number"
-        step="1"
         min="3"
         max="5"
-      />
-      Ranks of Men
-    </label>
+      ></fc-integer>
+    </div>
   </fieldset>
 </form>
+<br />

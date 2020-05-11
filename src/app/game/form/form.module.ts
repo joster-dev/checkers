@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { FormControlModule } from '@joster/form-control';
 
 import { FormComponent } from './form.component';
 
@@ -8,7 +9,8 @@ import { FormComponent } from './form.component';
     FormComponent
   ],
   imports: [
-    FormsModule
+    FormsModule,
+    FormControlModule
   ],
   exports: [
     FormComponent

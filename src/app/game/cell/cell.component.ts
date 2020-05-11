@@ -20,13 +20,6 @@ export class CellComponent {
     return (this.cell.x + this.cell.y) % 2 === 0;
   }
 
-  get isOccupantPawn(): boolean | void {
-    if (this.cell.occupant === undefined)
-      return;
-
-    return this.cell.occupant.isKing === false;
-  }
-
   get title() {
     if (this.cell.occupant === undefined)
       return '';

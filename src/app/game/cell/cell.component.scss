@@ -27,14 +27,9 @@ button {
     bottom: 0;
     right: 0;
     left: 0;
-    font-size: 5rem;
     opacity: 0.08;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     user-select: none;
     pointer-events: none;
-    overflow: hidden;
   }
 
   > .target {
