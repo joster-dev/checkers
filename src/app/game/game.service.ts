@@ -62,6 +62,7 @@ export class GameService {
           || (x === 6 && y === 4)
           || (x === 6 && y === 2)) {
           cell.occupant = new Piece('b');
+          // cell.occupant.isKing = true;
         }
 
         temp.push(cell);
