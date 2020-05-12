@@ -17,13 +17,12 @@ export class Game {
   get moves(): Move[] {
     return this.army
       .reduce((accumulator, cell) => {
-        const diagonal = this.diagonal(cell, 2);
+        const jumpMoves = this.jumpMoves2({ source: cell, targets: [] });
 
+        const diagonal = this.diagonal(cell);
         const openMoves = diagonal
           .filter(cells => cells.length > 0 && cells[0].occupant === undefined)
           .map(cells => ({ source: cell, targets: [cells[0]] }));
-
-        const jumpMoves = this.jumpMoves2({ source: cell, targets: [] });
 
         return accumulator.concat(openMoves, jumpMoves);
       }, [] as Move[]);
@@ -32,10 +31,18 @@ export class Game {
   private jumpMoves2(move: Move): Move[] {
     const cellsCopy = JSON.parse(JSON.stringify(this.cells));
     const gameCopy = new Game(cellsCopy, this.turn);
-    const source = move.targets.length === 0
-      ? move.source
-      : move.targets[move.targets.length - 1];
+    let source: Cell = move.source;
+    for (const target of move.targets) {
+      const copySource = gameCopy.cell({ x: source.x, y: source.y });
+      const copyCenter = gameCopy.cell({ x: (target.x + source.x) / 2, y: (target.y + source.y) / 2 });
+      const copyTarget = gameCopy.cell({ x: target.x, y: target.y })
+      copyCenter.occupant = undefined;
+      copyTarget.occupant = copySource.occupant;
+      copySource.occupant = undefined;
+      source = copyTarget;
+    }
     const diagonal = gameCopy.diagonal(source, 2);
+
     const jumpMoves = diagonal
       .filter(cells => cells.length > 1
         && cells[0].occupant !== undefined
@@ -70,7 +77,7 @@ export class Game {
     ]
       .filter(coordinate => cell.occupant === undefined
         || cell.occupant.isKing === true
-        || cell.occupant.side === 'a' ? coordinate.x > 0 : coordinate.x < 0)
+        || (cell.occupant.side === 'a' ? (coordinate.x > 0) : (coordinate.x < 0)))
       .map(coordinate => {
         let temp: Cell[] = [];
         for (let i = 0; i < depth; i++)
@@ -80,7 +87,6 @@ export class Game {
         return temp;
       })
       .filter(cells => cells.length > 0);
-
   }
 
   play(move: Move) {

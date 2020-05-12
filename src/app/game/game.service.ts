@@ -55,10 +55,10 @@ export class GameService {
           cell.occupant.isKing = true;
         }
 
-        if ((x === 4 && y === 4)
-          || (x === 7 && y === 1)
-          || (x === 4 && y === 6)
-          || (x === 6 && y === 6)
+        if ((x === 6 && y === 6)
+          // || (x === 7 && y === 1)
+          // || (x === 4 && y === 6)
+          || (x === 4 && y === 4)
           || (x === 6 && y === 4)
           || (x === 6 && y === 2)) {
           cell.occupant = new Piece('b');
