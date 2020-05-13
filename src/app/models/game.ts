@@ -89,8 +89,26 @@ export class Game {
       .filter(cells => cells.length > 0);
   }
 
-  play(move: Move) {
-
+  play(move: Move): boolean {
+    let source: Cell = move.source;
+    for (const target of move.targets) {
+      const copySource = this.cell({ x: source.x, y: source.y });
+      const copyCenter = this.cell({ x: (target.x + source.x) / 2, y: (target.y + source.y) / 2 });
+      const copyTarget = this.cell({ x: target.x, y: target.y })
+      copyCenter.occupant = undefined;
+      copyTarget.occupant = copySource.occupant;
+      copySource.occupant = undefined;
+      source = copyTarget;
+    }
+    const enemySide = this.turn === 'a' ? 'b' : 'a';
+    const enemyPieces = this.cells
+      .filter(cell => cell.occupant !== undefined && cell.occupant.side === enemySide);
+    if (enemyPieces.length === 0)
+      return true;
+    if (source.kingHead === enemySide && source.occupant !== undefined)
+      source.occupant.isKing = true;
+    this.turn = this.turn === 'a' ? 'b' : 'a';
+    return false;
   }
 
 }
