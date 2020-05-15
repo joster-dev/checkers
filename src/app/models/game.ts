@@ -89,10 +89,14 @@ export class Game {
   play(move: Move): boolean {
     let source: Cell = move.source;
     for (const target of move.targets) {
+      const centerX = (target.x + source.x) / 2;
+      const centerY = (target.y + source.y) / 2;
+      if (centerX % 1 === 0 && centerY % 1 === 0) {
+        const copyCenter = this.cell(centerX, centerY);
+        copyCenter.occupant = undefined;
+      }
       const copySource = this.cell(source.x, source.y);
-      const copyCenter = this.cell((target.x + source.x) / 2, (target.y + source.y) / 2);
       const copyTarget = this.cell(target.x, target.y)
-      copyCenter.occupant = undefined;
       copyTarget.occupant = copySource.occupant;
       copySource.occupant = undefined;
       source = copyTarget;

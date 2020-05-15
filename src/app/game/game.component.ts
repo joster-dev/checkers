@@ -10,61 +10,64 @@ import { Move } from '../models/move.interface';
 })
 export class GameComponent {
   game!: Game;
-  moves: Move[] = [];
   form = new Form();
-
-  sourceCell?: Cell;
-  // todo: implement reverse actions for player
-  moveBuilderIndex = 0;
+  moves: Move[] = [];
+  source?: Cell;
+  targets: Cell[] = [];
 
   constructor(private gameService: GameService) {
     this.newGame();
   }
 
-  get targetCells(): Cell[] {
-    return this.moves
-      .filter(move => this.sourceCell === undefined || move.source === this.sourceCell)
-      .reduce((accumulator, move) => {
-        if (move.targets.length - 1 < this.moveBuilderIndex) {
-          return [...accumulator];
-        }
-        return [...accumulator, move.targets[this.moveBuilderIndex]];
-      }, []);
-  }
+  // get targetCells(): Cell[] {
+  //   return this.moves
+  //     .reduce((accumulator, move) => {
+  //       if (move.targets.length - 1 < this.sourceCells.length)
+  //         return [...accumulator];
+  //       return [...accumulator, move.targets[this.sourceCells.length]];
+  //     }, []);
+  // }
 
   isDisabled(cell: Cell) {
-    if (this.sourceCell === undefined)
+    if (cell.occupant?.side === this.game.turn)
+      return false;
+
+    if (this.source === undefined)
       return this.moves
         .map(move => move.source)
         .includes(cell) === false;
 
-    if (this.sourceCell === cell)
-      return false;
-
-    return this.targetCells.find(item => cell.x === item.x && cell.y === item.y) === undefined;
+    return this.moves
+      .filter(move => move.source === this.source)
+      .map(move => move.targets[this.targets.length])
+      .includes(cell) === false;
   }
 
   click(cell: Cell) {
-    if (cell.occupant !== undefined && cell.occupant.side === this.game.turn) {
-      this.sourceCell = cell === this.sourceCell ? undefined : cell;
+    if (cell.occupant?.side === this.game.turn) {
+      this.source = cell === this.source
+        ? undefined
+        : cell;
+      this.targets = [];
       return;
     }
 
-    if (cell === this.sourceCell) {
-      this.sourceCell = undefined;
-      return;
-    }
+    // todo: this fails in case where 2 different paths have same length
+    const moves = this.moves
+      .filter(move => move.targets[this.targets.length] === cell);
 
-    const move = this.moves.find(m => m.targets[this.moveBuilderIndex] === cell);
-    if (move === undefined) {
+    if (moves.length === 0)
       throw new Error('invalid move, cell should be disabled');
-    }
-    if (move.targets.length - 1 === this.moveBuilderIndex) {
-      this.game.play(move);
+
+    if (moves.length === 1 && moves[0].targets.length - 1 === this.targets.length) {
+      this.game.play(moves[0]);
+      this.moves = this.game.moves();
+      delete this.source;
+      this.targets = [];
       return;
     }
-    this.moveBuilderIndex = this.moveBuilderIndex + 1;
-    debugger
+
+    this.targets = [cell, ...this.targets];
   }
 
   newGame() {

@@ -50,7 +50,8 @@ export class GameService {
             cell = new Cell(x, y, 'b');
         }
 
-        if (x === 3 && y === 5) {
+        if ((x === 3 && y === 5)
+          || (x === 3 && y === 3)) {
           cell.occupant = new Piece('a');
           // cell.occupant.isKing = true;
         }
@@ -58,6 +59,7 @@ export class GameService {
         if ((x === 6 && y === 6)
           // || (x === 7 && y === 1)
           // || (x === 4 && y === 6)
+          || (x === 4 && y === 2)
           || (x === 4 && y === 4)
           || (x === 6 && y === 4)
           || (x === 6 && y === 2)) {
