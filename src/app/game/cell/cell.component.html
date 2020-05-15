@@ -1,6 +1,5 @@
 <button
   type="button"
-  [class.active]="isActive"
   [class.accent]="isAccent"
   [class.king-head]="cell.kingHead"
   [class.target]="isTarget"
@@ -12,6 +11,7 @@
     *ngIf="cell.occupant !== undefined"
     [type]="cell.occupant?.isKing === true ? 'king' : 'pawn'"
     [side]="cell.occupant?.side"
+    [isActive]="isActive === true"
   ></checkers-icon>
   <div
     *ngIf="isTarget"

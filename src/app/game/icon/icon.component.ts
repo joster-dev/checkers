@@ -1,18 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'checkers-icon',
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.scss']
 })
-export class IconComponent implements OnInit {
+export class IconComponent {
   @Input() type: 'pawn' | 'king' | 'kinghead' = 'pawn';
   @Input() side: 'a' | 'b' = 'a';
-  @Input() disabled = false;
+  @Input() isDisabled = false;
+  @Input() isActive = false;
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

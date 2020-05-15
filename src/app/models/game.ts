@@ -1,5 +1,4 @@
 import { Cell } from './cell';
-import { Piece } from './piece';
 import { Move } from './move.interface';
 
 export class Game {
@@ -9,18 +8,16 @@ export class Game {
     public turn: 'a' | 'b' = 'a'
   ) { }
 
-  get army(): Cell[] {
+  moves(): Move[] {
     return this.cells
-      .filter(cell => cell.occupant !== undefined && cell.occupant.side === this.turn);
-  }
-
-  get moves(): Move[] {
-    return this.army
+      .filter(cell => cell.occupant !== undefined && cell.occupant.side === this.turn)
       .reduce((accumulator, cell) => {
-        const jumpMoves = this.jumpMoves2({ source: cell, targets: [] });
+        const jumpMoves = this.jumpMoves({ source: cell, targets: [] });
 
-        const diagonal = this.diagonal(cell);
-        const openMoves = diagonal
+        if (jumpMoves.length > 0)
+          return accumulator.concat(jumpMoves);
+
+        const openMoves = this.diagonal(cell)
           .filter(cells => cells.length > 0 && cells[0].occupant === undefined)
           .map(cells => ({ source: cell, targets: [cells[0]] }));
 
@@ -28,14 +25,14 @@ export class Game {
       }, [] as Move[]);
   }
 
-  private jumpMoves2(move: Move): Move[] {
+  private jumpMoves(move: Move): Move[] {
     const cellsCopy = JSON.parse(JSON.stringify(this.cells));
     const gameCopy = new Game(cellsCopy, this.turn);
     let source: Cell = move.source;
     for (const target of move.targets) {
-      const copySource = gameCopy.cell({ x: source.x, y: source.y });
-      const copyCenter = gameCopy.cell({ x: (target.x + source.x) / 2, y: (target.y + source.y) / 2 });
-      const copyTarget = gameCopy.cell({ x: target.x, y: target.y })
+      const copySource = gameCopy.cell(source.x, source.y);
+      const copyCenter = gameCopy.cell((target.x + source.x) / 2, (target.y + source.y) / 2);
+      const copyTarget = gameCopy.cell(target.x, target.y)
       copyCenter.occupant = undefined;
       copyTarget.occupant = copySource.occupant;
       copySource.occupant = undefined;
@@ -56,12 +53,12 @@ export class Game {
     }
 
     return jumpMoves
-      .map(jump => this.jumpMoves2({ source: move.source, targets: move.targets.concat(this.cell(jump[1])) }))
+      .map(jump => this.jumpMoves({ source: move.source, targets: move.targets.concat(this.cell(jump[1].x, jump[1].y)) }))
       .reduce((acc, cells) => acc.concat(cells), []);
   }
 
-  cell(cell: { x: number; y: number }): Cell {
-    const temp = this.cells.find(item => item.x === cell.x && item.y === cell.y);
+  cell(x: number, y: number): Cell {
+    const temp = this.cells.find(item => item.x === x && item.y === y);
     if (temp === undefined)
       throw new Error('invalid cell');
     return temp;
@@ -92,9 +89,9 @@ export class Game {
   play(move: Move): boolean {
     let source: Cell = move.source;
     for (const target of move.targets) {
-      const copySource = this.cell({ x: source.x, y: source.y });
-      const copyCenter = this.cell({ x: (target.x + source.x) / 2, y: (target.y + source.y) / 2 });
-      const copyTarget = this.cell({ x: target.x, y: target.y })
+      const copySource = this.cell(source.x, source.y);
+      const copyCenter = this.cell((target.x + source.x) / 2, (target.y + source.y) / 2);
+      const copyTarget = this.cell(target.x, target.y)
       copyCenter.occupant = undefined;
       copyTarget.occupant = copySource.occupant;
       copySource.occupant = undefined;

@@ -2,23 +2,18 @@ button {
   width: 100%;
   height: 100%;
   position: relative;
-  background-color: white;
+  background-color: #fff;
   border-width: medium;
-  font-size: x-large;
   cursor: pointer;
   padding: 0;
 
   &:disabled {
     cursor: default;
-    border: none;
+    border-color: transparent;
   }
 
   &.accent {
     background-color: #eee;
-  }
-
-  &.active {
-    box-shadow: inset 0 0 1em black;
   }
 
   > .watermark {
