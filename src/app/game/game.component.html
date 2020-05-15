@@ -3,7 +3,7 @@
   <checkers-cell
     *ngFor="let cell of game.cells"
     [cell]="cell"
-    [isActive]="cell === sourceCell"
+    [isActive]="cell === source || targets.includes(cell) === true"
     [isDisabled]="isDisabled(cell) === true"
     [style.grid-column]="cell.x + 1"
     [style.grid-row]="cell.y + 1"
