@@ -19,28 +19,17 @@ export class GameComponent {
     this.newGame();
   }
 
-  // get targetCells(): Cell[] {
-  //   return this.moves
-  //     .reduce((accumulator, move) => {
-  //       if (move.targets.length - 1 < this.sourceCells.length)
-  //         return [...accumulator];
-  //       return [...accumulator, move.targets[this.sourceCells.length]];
-  //     }, []);
-  // }
-
   isDisabled(cell: Cell) {
-    if (cell.occupant?.side === this.game.turn)
-      return false;
+    const isSource = this.moves
+      .map(move => move.source)
+      .includes(cell) === true;
 
-    if (this.source === undefined)
-      return this.moves
-        .map(move => move.source)
-        .includes(cell) === false;
-
-    return this.moves
+    const isNextTarget = this.moves
       .filter(move => move.source === this.source)
       .map(move => move.targets[this.targets.length])
-      .includes(cell) === false;
+      .includes(cell) === true;
+
+    return isSource === false && isNextTarget === false;
   }
 
   click(cell: Cell) {
@@ -52,14 +41,16 @@ export class GameComponent {
       return;
     }
 
-    // todo: this fails in case where 2 different paths have same length
+    this.targets = [cell, ...this.targets];
+
     const moves = this.moves
-      .filter(move => move.targets[this.targets.length] === cell);
+      .filter(move => move.source === this.source)
+      .filter(move => this.targets.every((target, index) => move.targets[index] === target));
 
     if (moves.length === 0)
       throw new Error('invalid move, cell should be disabled');
 
-    if (moves.length === 1 && moves[0].targets.length - 1 === this.targets.length) {
+    if (moves.length === 1 && moves[0].targets.length === this.targets.length) {
       this.game.play(moves[0]);
       this.moves = this.game.moves();
       delete this.source;
@@ -67,12 +58,12 @@ export class GameComponent {
       return;
     }
 
-    this.targets = [cell, ...this.targets];
+    throw new Error('what happen');
   }
 
   newGame() {
-    // const board = this.gameService.createBoard(this.form);
-    const board = this.gameService.createTestBoard();
+    const board = this.gameService.createBoard(this.form);
+    // const board = this.gameService.createTestBoard();
     this.game = new Game(board);
     this.moves = this.game.moves();
   }
