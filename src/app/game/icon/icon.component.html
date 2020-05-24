@@ -6,20 +6,26 @@
   viewBox="0 0 100 100"
   [class.drop-shadow]="isActive === true"
 >
-  <linearGradient id="a-grad">
+  <linearGradient
+    *ngIf="side === 'a'"
+    id="a-grad"
+  >
     <stop
       offset="0%"
       stop-color="#000000"
     />
     <stop
       offset="100%"
-      stop-color="blue"
+      [attr.stop-color]="'#' + color"
     />
   </linearGradient>
-  <linearGradient id="b-grad">
+  <linearGradient
+    *ngIf="side === 'b'"
+    id="b-grad"
+  >
     <stop
       offset="0%"
-      stop-color="red"
+      [attr.stop-color]="'#' + color"
     />
     <stop
       offset="100%"

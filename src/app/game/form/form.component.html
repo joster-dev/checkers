@@ -1,10 +1,52 @@
 <br />
-<form>
+<form #form1="ngForm">
   <div>
     <fc-button (clicked)="restart.emit()">
       Restart
     </fc-button>
   </div>
+  <section>
+    <fieldset>
+      <legend>
+        Left Player
+      </legend>
+      <div>
+        <fc-text
+          [(ngModel)]="form.leftName"
+          label="Name"
+          name="leftName"
+        ></fc-text>
+        <br />
+        <fc-color
+          [(ngModel)]="form.leftColor"
+          (ngModelChange)="form.valid && restart.emit()"
+          required
+          label="Color"
+          name="leftColor"
+        ></fc-color>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>
+        Right Player
+      </legend>
+      <div>
+        <fc-text
+          [(ngModel)]="form.rightName"
+          label="Name"
+          name="rightName"
+        ></fc-text>
+        <br />
+        <fc-color
+          [(ngModel)]="form.rightColor"
+          (ngModelChange)="form.valid && restart.emit()"
+          required
+          label="Color"
+          name="rightColor"
+        ></fc-color>
+      </div>
+    </fieldset>
+  </section>
   <fieldset>
     <legend title="Settings">
       ⚙️
@@ -12,7 +54,7 @@
     <div>
       <fc-integer
         [(ngModel)]="form.width"
-        (ngModelChange)="restart.emit()"
+        (ngModelChange)="form.valid && restart.emit()"
         label="Board Width"
         name="width"
         type="number"
@@ -21,7 +63,7 @@
       ></fc-integer>
       <fc-integer
         [(ngModel)]="form.height"
-        (ngModelChange)="restart.emit()"
+        (ngModelChange)="form.valid && restart.emit()"
         label="Board Height"
         name="height"
         type="number"
@@ -30,7 +72,7 @@
       ></fc-integer>
       <fc-integer
         [(ngModel)]="form.rank"
-        (ngModelChange)="restart.emit()"
+        (ngModelChange)="form.valid && restart.emit()"
         label="Ranks of Men"
         name="rank"
         type="number"

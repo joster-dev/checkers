@@ -9,19 +9,25 @@ form {
     }
   }
 
-  > fieldset {
+  fieldset {
     padding: 1em;
     margin: 0.5em;
     border: 1px solid black;
     box-shadow: 0.2em 0.2em 0.2em 0 lightgrey;
+  }
 
-    > div {
-      display: grid;
-      grid-gap: 1em;
-      grid-template-columns: repeat(2, 1fr);
-      @media screen and (min-width: 635px) {
-        grid-template-columns: repeat(3, 1fr);
-      }
+  > section {
+    display: grid;
+    grid-gap: 1em;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  > fieldset > div {
+    display: grid;
+    grid-gap: 1em;
+    grid-template-columns: repeat(2, 1fr);
+    @media screen and (min-width: 635px) {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 }

@@ -10,6 +10,7 @@ export class IconComponent {
   @Input() side: 'a' | 'b' = 'a';
   @Input() isDisabled = false;
   @Input() isActive = false;
+  @Input() color = 'ffffff';
 
   constructor() { }
 }

@@ -5,6 +5,7 @@
     [cell]="cell"
     [isActive]="cell === source || targets.includes(cell) === true"
     [isDisabled]="isDisabled(cell) === true"
+    [form]="form"
     [style.grid-column]="cell.x + 1"
     [style.grid-row]="cell.y + 1"
     (action)="click(cell)"

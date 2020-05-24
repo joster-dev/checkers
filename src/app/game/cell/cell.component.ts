@@ -1,5 +1,5 @@
 import { Component, Output, Input, EventEmitter } from '@angular/core';
-import { Cell } from 'src/app/models';
+import { Cell, Form } from 'src/app/models';
 
 @Component({
   selector: 'checkers-cell[cell]',
@@ -11,6 +11,7 @@ export class CellComponent {
   @Input() isActive = false;
   @Input() isDisabled = false;
   @Input() isTarget = false;
+  @Input() form!: Form;
 
   @Output() action = new EventEmitter();
 
