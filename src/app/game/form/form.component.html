@@ -1,5 +1,5 @@
 <br />
-<form #form1="ngForm">
+<form #form="ngForm">
   <div>
     <fc-button (clicked)="restart.emit()">
       Restart
@@ -12,13 +12,13 @@
       </legend>
       <div>
         <fc-text
-          [(ngModel)]="form.leftName"
+          [(ngModel)]="model.leftName"
           label="Name"
           name="leftName"
         ></fc-text>
         <br />
         <fc-color
-          [(ngModel)]="form.leftColor"
+          [(ngModel)]="model.leftColor"
           (ngModelChange)="form.valid && restart.emit()"
           required
           label="Color"
@@ -32,13 +32,13 @@
       </legend>
       <div>
         <fc-text
-          [(ngModel)]="form.rightName"
+          [(ngModel)]="model.rightName"
           label="Name"
           name="rightName"
         ></fc-text>
         <br />
         <fc-color
-          [(ngModel)]="form.rightColor"
+          [(ngModel)]="model.rightColor"
           (ngModelChange)="form.valid && restart.emit()"
           required
           label="Color"
@@ -53,7 +53,7 @@
     </legend>
     <div>
       <fc-integer
-        [(ngModel)]="form.width"
+        [(ngModel)]="model.width"
         (ngModelChange)="form.valid && restart.emit()"
         label="Board Width"
         name="width"
@@ -62,7 +62,7 @@
         max="100"
       ></fc-integer>
       <fc-integer
-        [(ngModel)]="form.height"
+        [(ngModel)]="model.height"
         (ngModelChange)="form.valid && restart.emit()"
         label="Board Height"
         name="height"
@@ -71,7 +71,7 @@
         max="100"
       ></fc-integer>
       <fc-integer
-        [(ngModel)]="form.rank"
+        [(ngModel)]="model.rank"
         (ngModelChange)="form.valid && restart.emit()"
         label="Ranks of Men"
         name="rank"
