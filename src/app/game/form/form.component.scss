@@ -19,7 +19,10 @@ form {
   > section {
     display: grid;
     grid-gap: 1em;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+    @media screen and (min-width: 635px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   > fieldset > div {
