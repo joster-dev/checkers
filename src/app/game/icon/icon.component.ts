@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class IconComponent {
   @Input() type: 'pawn' | 'king' | 'kinghead' = 'pawn';
-  @Input() side: 'a' | 'b' = 'a';
+  @Input() side: 'a' | 'b' | undefined = 'a';
   @Input() isDisabled = false;
   @Input() isActive = false;
   @Input() color = 'ffffff';

@@ -1,5 +1,5 @@
 import { Cell } from './cell';
-import { Move } from './move.interface';
+import { Move } from './move';
 
 export class Game {
 

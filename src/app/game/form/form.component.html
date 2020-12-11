@@ -1,4 +1,3 @@
-<br />
 <form #form="ngForm">
   <div>
     <fc-button (clicked)="restart.emit()">
@@ -10,40 +9,42 @@
       <legend>
         Left Player
       </legend>
-      <div>
+      <div class="col-1">
         <fc-text
           [(ngModel)]="model.leftName"
-          label="Name"
           name="leftName"
-        ></fc-text>
-        <br />
+        >
+          Name
+        </fc-text>
         <fc-color
           [(ngModel)]="model.leftColor"
           (ngModelChange)="form.valid && restart.emit()"
           required
-          label="Color"
           name="leftColor"
-        ></fc-color>
+        >
+          Color
+        </fc-color>
       </div>
     </fieldset>
     <fieldset>
       <legend>
         Right Player
       </legend>
-      <div>
+      <div class="col-1">
         <fc-text
           [(ngModel)]="model.rightName"
-          label="Name"
           name="rightName"
-        ></fc-text>
-        <br />
+        >
+          Name
+        </fc-text>
         <fc-color
           [(ngModel)]="model.rightColor"
           (ngModelChange)="form.valid && restart.emit()"
           required
-          label="Color"
           name="rightColor"
-        ></fc-color>
+        >
+          Color
+        </fc-color>
       </div>
     </fieldset>
   </section>
@@ -51,34 +52,37 @@
     <legend title="Settings">
       ⚙️
     </legend>
-    <div>
-      <fc-integer
+    <div class="col-3">
+      <fc-number
         [(ngModel)]="model.width"
         (ngModelChange)="form.valid && restart.emit()"
-        label="Board Width"
         name="width"
         type="number"
-        min="8"
-        max="100"
-      ></fc-integer>
-      <fc-integer
+        [min]="8"
+        [max]="100"
+      >
+        Board Width
+      </fc-number>
+      <fc-number
         [(ngModel)]="model.height"
         (ngModelChange)="form.valid && restart.emit()"
-        label="Board Height"
         name="height"
         type="number"
-        min="8"
-        max="100"
-      ></fc-integer>
-      <fc-integer
+        [min]="8"
+        [max]="100"
+      >
+        Board Height
+      </fc-number>
+      <fc-number
         [(ngModel)]="model.rank"
         (ngModelChange)="form.valid && restart.emit()"
-        label="Ranks of Men"
         name="rank"
         type="number"
-        min="3"
-        max="5"
-      ></fc-integer>
+        [min]="3"
+        [max]="5"
+      >
+        Ranks of Men
+      </fc-number>
     </div>
   </fieldset>
 </form>

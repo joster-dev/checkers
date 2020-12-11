@@ -12,8 +12,9 @@ form {
   fieldset {
     padding: 1em;
     margin: 0.5em;
-    border: 1px solid black;
-    box-shadow: 0.2em 0.2em 0.2em 0 lightgrey;
+    border: 1px solid #d3d3d3;
+    border-radius: 0.5em;
+    box-shadow: 0.2em 0.2em 0.2em 0 #d3d3d3;
   }
 
   > section {

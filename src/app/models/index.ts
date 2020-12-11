@@ -1,4 +1,4 @@
-export { Cell } from './cell';
-export { Game } from './game';
-export { Piece } from './piece';
-export { Form } from './form';
+export * from './cell';
+export * from './form';
+export * from './game';
+export * from './piece';

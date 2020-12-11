@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Cell, Form, Piece } from '../models';
+import { Cell, Form, Piece } from './models';
 
 @Injectable({
   providedIn: 'root'

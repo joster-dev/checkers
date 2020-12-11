@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Form, Game, Cell } from '../models';
-import { GameService } from './game.service';
-import { Move } from '../models/move.interface';
+import { Cell, Form, Game } from '../models';
+import { GameService } from '../game.service';
+import { Move } from '../models/move';
 
 @Component({
   selector: 'checkers-game',

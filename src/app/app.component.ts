@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'checkers-root',
-  template: `<checkers-game></checkers-game>`
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent { }
+export class AppComponent {
+
+  constructor() { }
+}
