@@ -45,7 +45,7 @@ export class GameComponent {
 
     const moves = this.moves
       .filter(move => move.source === this.source)
-      .filter(move => this.targets.every((target, index) => move.targets[index] === target));
+      .filter(move => this.targets.every(target => move.targets.includes(target)));
 
     if (moves.length === 0)
       throw new Error('invalid move, cell should be disabled');
@@ -57,13 +57,11 @@ export class GameComponent {
       this.targets = [];
       return;
     }
-
-    throw new Error('what happen');
   }
 
   newGame() {
-    const board = this.gameService.createBoard(this.form);
-    // const board = this.gameService.createTestBoard();
+    // const board = this.gameService.createBoard(this.form);
+    const board = this.gameService.createTestBoard();
     this.game = new Game(board);
     this.moves = this.game.moves();
   }
