@@ -11,7 +11,7 @@ export class Game {
   moves(): Move[] {
     return this.cells
       .filter(cell => cell.occupant !== undefined && cell.occupant.side === this.turn)
-      .reduce((accumulator, cell) => {
+      .reduce((accumulator: Move[], cell) => {
         const jumpMoves = this.jumpMoves({ source: cell, targets: [] });
 
         if (jumpMoves.length > 0)
@@ -22,7 +22,7 @@ export class Game {
           .map(cells => ({ source: cell, targets: [cells[0]] }));
 
         return accumulator.concat(openMoves, jumpMoves);
-      }, [] as Move[]);
+      }, []);
   }
 
   private jumpMoves(move: Move): Move[] {
@@ -32,7 +32,7 @@ export class Game {
     for (const target of move.targets) {
       const copySource = gameCopy.cell(source.x, source.y);
       const copyCenter = gameCopy.cell((target.x + source.x) / 2, (target.y + source.y) / 2);
-      const copyTarget = gameCopy.cell(target.x, target.y)
+      const copyTarget = gameCopy.cell(target.x, target.y);
       copyCenter.occupant = undefined;
       copyTarget.occupant = copySource.occupant;
       copySource.occupant = undefined;
@@ -96,7 +96,7 @@ export class Game {
         copyCenter.occupant = undefined;
       }
       const copySource = this.cell(source.x, source.y);
-      const copyTarget = this.cell(target.x, target.y)
+      const copyTarget = this.cell(target.x, target.y);
       copyTarget.occupant = copySource.occupant;
       copySource.occupant = undefined;
       source = copyTarget;
@@ -111,5 +111,4 @@ export class Game {
     this.turn = this.turn === 'a' ? 'b' : 'a';
     return false;
   }
-
 }

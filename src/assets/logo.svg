@@ -1,0 +1,50 @@
+<svg
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 100 100"
+>
+  <linearGradient
+    id="lg1"
+    gradientUnits="userSpaceOnUse"
+    gradientTransform="rotate(90)"
+  >
+    <stop
+      offset="0"
+      style="stop-color:#FFFFFF"
+    />
+    <stop
+      offset="1"
+      style="stop-color:#DDDDDD"
+    />
+  </linearGradient>
+  <path
+    fill="url(#lg1)"
+    d="M100,88c0,6.628-5.372,12-12,12H12c-6.627,0-12-5.372-12-12V12C0,5.373,5.373,0,12,0h76
+	c6.628,0,12,5.373,12,12V88z"
+  />
+  <linearGradient
+    id="lg2"
+    gradientUnits="userSpaceOnUse"
+    gradientTransform="rotate(0)"
+  >
+    <stop
+      offset="0"
+      style="stop-color:#000000"
+    />
+    <stop
+      offset="1"
+      style="stop-color:#702400"
+    />
+  </linearGradient>
+  <path
+    fill="url(#lg2)"
+    stroke="#000000"
+    stroke-width="5"
+    stroke-miterlimit="10"
+    d="M95,22.5c0-4.143-3.357-7.5-7.5-7.5
+	S80,18.357,80,22.5c0,2.145,0.904,4.073,2.347,5.44L67.673,66.273l-13.37-50.136C56.234,14.781,57.5,12.54,57.5,10
+	c0-4.143-3.357-7.5-7.5-7.5s-7.5,3.357-7.5,7.5c0,2.54,1.266,4.78,3.197,6.137l-13.37,50.136L17.654,27.939
+	C19.096,26.573,20,24.644,20,22.5c0-4.143-3.357-7.5-7.5-7.5S5,18.357,5,22.5c0,3.673,2.642,6.724,6.128,7.369L14.857,72.5H12.5v15
+	H10v10h80v-10h-2.5v-15h-2.356l3.729-42.631C92.358,29.223,95,26.173,95,22.5z"
+  />
+</svg>
